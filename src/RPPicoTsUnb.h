@@ -121,7 +121,7 @@ namespace RPPico {
 
 
 //! Flag to indicate end of timer
-volatile absolute_time_t TimeAddedDelay;
+absolute_time_t TimeAddedDelay;
 volatile bool TsUnbTimerFlag;
 volatile bool ExtraDelaySet;
 volatile float preciseTsUnbTimer_us;

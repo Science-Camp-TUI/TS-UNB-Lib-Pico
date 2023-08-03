@@ -73,9 +73,9 @@ ks-contracts@iis.fraunhofer.de
 #include "../src/RPPicoTsUnb.h"
 
 // This is the node specific configuration
-#define MAC_NETWORK_KEY 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c
-#define MAC_EUI64       0x70, 0xB3, 0xD5, 0x67, 0x70, 0xFF, 0x00, 0x00
-#define MAC_SHORT_ADDR  0x70, 0xFF
+#define MAC_NETWORK_KEY 0xae, 0x61, 0x03, 0x64, 0xdc, 0xe9, 0xea, 0x12, 0xf1, 0xfe, 0x2f, 0xe5, 0x65, 0x12, 0xbd, 0x24
+#define MAC_EUI64       0x70, 0xB3, 0xD5, 0x67, 0x70, 0xFF, 0x03, 0x24
+#define MAC_SHORT_ADDR  0x03, 0x24
 
 
 #define TRANSMIT_PWR  	14      // Transmit power in dBm
@@ -85,7 +85,8 @@ using namespace TsUnbLib::RPPico;
 
 // Select preset depending on TX chip
 //TsUnb_EU1_Rfm69w_t TsUnb_Node;
-TsUnb_EU1_Rfm69hw_t TsUnb_Node;
+//TsUnb_EU1_Rfm69hw_t TsUnb_Node;
+TsUnb_EU0_LowLatency_Rfm69w_t TsUnb_Node;
 
 //TsUnb_US0_Rfm69w_t TsUnb_Node;
 //TsUnb_US0_Rfm69hw_t TsUnb_Node;
@@ -125,8 +126,8 @@ int main() {
 	setup();
 	
 	while(1){
-		// Send the text "Hello"
-		char str[] = "Hello";
+		// Send the text "Hello Peter!"
+		char str[] = "Hello Peter!";
 		TsUnb_Node.send((uint8_t *)str, sizeof(str) / sizeof(str[0]) - 1);
 
 		// Blink LED when TX is done

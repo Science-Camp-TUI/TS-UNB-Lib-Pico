@@ -1,0 +1,4 @@
+examples/build/** 
+examples/CMakeFiles
+examples/generated
+examples/pico-sdk
