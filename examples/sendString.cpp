@@ -73,9 +73,9 @@ ks-contracts@iis.fraunhofer.de
 #include "../src/RPPicoTsUnb.h"
 
 // This is the node specific configuration
-#define MAC_NETWORK_KEY 0xae, 0x61, 0x03, 0x64, 0xdc, 0xe9, 0xea, 0x12, 0xf1, 0xfe, 0x2f, 0xe5, 0x65, 0x12, 0xbd, 0x24
-#define MAC_EUI64       0x70, 0xB3, 0xD5, 0x67, 0x70, 0xFF, 0x03, 0x24
-#define MAC_SHORT_ADDR  0x03, 0x24
+#if not defined(MAC_NETWORK_KEY) or not defined(MAC_EUI64) or not defined(MAC_SHORT_ADDR)
+	#error "Please define MAC_NETWORK_KEY, MAC_EUI64 and MAC_SHORT_ADDR"
+#endif
 
 
 #define TRANSMIT_PWR  	14      // Transmit power in dBm
@@ -126,7 +126,6 @@ int main() {
 	setup();
 	
 	while(1){
-		// Send the text "Hello Peter!"
 		char str[] = "Hello Peter!";
 		TsUnb_Node.send((uint8_t *)str, sizeof(str) / sizeof(str[0]) - 1);
 
