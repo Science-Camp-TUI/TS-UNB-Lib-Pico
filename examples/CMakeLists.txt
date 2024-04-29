@@ -10,7 +10,10 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(sendString sendString.cpp)
+add_executable(serialInterface serialInterface.cpp)
+
 target_link_libraries(sendString hardware_spi pico_stdlib)
+target_link_libraries(serialInterface hardware_spi pico_stdlib)
 
 if (NOT EXISTS "${CMAKE_SOURCE_DIR}/.env") 
     message(FATAL_ERROR "Please create a .env file in the project root directory and set the following variables: 
@@ -32,10 +35,16 @@ else()
     message(STATUS "MAC_EUI64       define: ${MAC_EUI64}")
     message(STATUS "MAC_SHORT_ADDR  define: ${MAC_SHORT_ADDR}")
     target_compile_definitions(sendString PRIVATE ${MAC_NETWORK_KEY} ${MAC_EUI64} ${MAC_SHORT_ADDR})
+    target_compile_definitions(serialInterface PRIVATE ${MAC_NETWORK_KEY} ${MAC_EUI64} ${MAC_SHORT_ADDR})
 endif()
 
 # Initialize the SDK
 pico_sdk_init()
 
+pico_enable_stdio_usb(serialInterface 1)
+pico_enable_stdio_uart(serialInterface 0)
+
+
+pico_add_extra_outputs(serialInterface)
 pico_add_extra_outputs(sendString)
 
